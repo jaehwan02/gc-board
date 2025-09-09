@@ -1,8 +1,10 @@
 package gc.board.article.api;
 
+import gc.board.article.service.response.ArticlePageResponse;
 import gc.board.article.service.response.ArticleResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.client.RestClient;
 
@@ -70,6 +72,19 @@ public class ArticleApiTest {
             .uri("/v1/articles/{articleId}", createdArticleId)
             .retrieve();
     System.out.println("Deleted Article ID: " + createdArticleId);
+  }
+
+  @Test
+  void readAllTest() {
+    ArticlePageResponse response = restClient.get()
+            .uri("/v1/articles?boardId=1&pageSize=30&page=1")
+            .retrieve()
+            .body(ArticlePageResponse.class);
+    Assertions.assertNotNull(response);
+    System.out.println(response.getArticleCount());
+    for (ArticleResponse article : response.getArticles()) {
+      System.out.println(article.getArticleId());
+    }
   }
 
   @Getter
