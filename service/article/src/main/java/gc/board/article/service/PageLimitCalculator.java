@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 public final class PageLimitCalculator {
 
     public static Long calculatePageLimit(Long page, Long pageSize, Long movablePageCount) {
-        Long pageLimit = (((page - 1) / movablePageCount) + 1) * pageSize * movablePageCount + 1;
-        return pageLimit;
+        return (((page - 1) / movablePageCount) + 1) * pageSize * movablePageCount + 1;
     }
 }
