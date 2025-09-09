@@ -3,6 +3,7 @@ package gc.board.article.controller;
 import gc.board.article.service.ArticleService;
 import gc.board.article.service.request.ArticleCreateRequest;
 import gc.board.article.service.request.ArticleUpdateRequest;
+import gc.board.article.service.response.ArticlePageResponse;
 import gc.board.article.service.response.ArticleResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +31,10 @@ public class ArticleController {
   @DeleteMapping("/v1/articles/{articleId}")
   public void delete(@PathVariable Long articleId) {
     articleService.delete(articleId);
+  }
+
+  @GetMapping("/v1/articles")
+  public ArticlePageResponse readAll(@RequestParam Long boardId, @RequestParam Long page, @RequestParam Long pageSize) {
+    return articleService.readAll(boardId, page, pageSize);
   }
 }
