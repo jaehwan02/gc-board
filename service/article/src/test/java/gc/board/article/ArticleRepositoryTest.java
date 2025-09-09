@@ -35,4 +35,14 @@ public class ArticleRepositoryTest {
                     article.getCreatedAt());
         }
     }
+
+    @Test
+    void countTest() {
+        Long boardId = 1L;
+        Long limit = 10000L;
+
+        Long count = articleRepository.count(boardId, limit);
+
+        log.info("count = {}", count);
+    }
 }
